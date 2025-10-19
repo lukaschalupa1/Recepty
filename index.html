@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Knihovna receptů — pokročilé třídění</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <div class="brand">
+        <h1>Knihovna receptů</h1>
+        <p class="tagline">Správa, vyhledávání a třídění receptů — rychle a přehledně</p>
+      </div>
+      <div class="controls">
+        <div class="search-wrap">
+          <input id="searchInput" placeholder="Hledat podle názvu, ingredience nebo kategorie…" />
+        </div>
+        <button id="addRecipeBtn" class="btn btn-primary">Přidat recept</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container main-grid">
+    <aside class="panel filters">
+      <h3>Filtry & třídění</h3>
+
+      <label>Filtrovat podle kategorie</label>
+      <select id="categoryFilter">
+        <option value="">— Všechny kategorie —</option>
+      </select>
+
+      <label>Filtrovat podle suroviny</label>
+      <div class="ingredient-filter">
+        <input id="ingredientFilter" placeholder="Napiš surovinu (např. vejce)" />
+        <button id="ingredientBtn" class="btn btn-ghost">Filtrovat</button>
+      </div>
+
+      <label>Třídit podle</label>
+      <select id="sortSelect">
+        <option value="newest">Nejnovější</option>
+        <option value="title_asc">Název (A→Z)</option>
+        <option value="title_desc">Název (Z→A)</option>
+        <option value="category">Kategorie</option>
+        <option value="ingredients_count_asc">Počet ingrediencí (rostoucí)</option>
+        <option value="ingredients_count_desc">Počet ingrediencí (klesající)</option>
+      </select>
+
+      <div class="meta">
+        <div>Počet receptů: <strong id="totalCount">0</strong></div>
+        <div>Zobrazeno: <strong id="visibleCount">0</strong></div>
+      </div>
+
+      <hr/>
+
+      <h4>Rychlé kategorie</h4>
+      <div id="quickCats" class="chips"></div>
+
+      <h4>Oblíbené suroviny</h4>
+      <div id="quickIngs" class="chips"></div>
+    </aside>
+
+    <section class="panel content">
+      <div id="recipesList" class="recipes-grid" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <header class="modal-header">
+        <h2 id="modalTitle">Přidat recept</h2>
+        <button id="modalClose" class="btn-close" aria-label="Zavřít">&times;</button>
+      </header>
+      <form id="recipeForm" class="modal-body">
+        <div class="field">
+          <label for="title">Název</label>
+          <input id="title" required />
+        </div>
+
+        <div class="field grid-2">
+          <div>
+            <label for="category">Kategorie</label>
+            <input id="category" placeholder="např. Polévky" />
+          </div>
+          <div>
+            <label for="prepTime">Doba přípravy</label>
+            <input id="prepTime" placeholder="30 min" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="servings">Porce</label>
+          <input id="servings" placeholder="2" />
+        </div>
+
+        <div class="field">
+          <label for="ingredients">Ingredience (oddělené čárkou nebo newline)</label>
+          <textarea id="ingredients" rows="4" required></textarea>
+        </div>
+
+        <div class="field">
+          <label for="steps">Postup</label>
+          <textarea id="steps" rows="6" required></textarea>
+        </div>
+
+        <div class="field">
+          <label for="image">Obrázek (volitelně)</label>
+          <input id="image" type="file" accept="image/*" />
+          <div id="imagePreview" class="image-preview hidden"></div>
+        </div>
+
+        <footer class="modal-footer">
+          <button type="button" id="cancelBtn" class="btn btn-ghost">Zrušit</button>
+          <button type="submit" class="btn btn-primary">Uložit recept</button>
+        </footer>
+      </form>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">© 2025 Knihovna receptů — lokalně v prohlížeči</div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
